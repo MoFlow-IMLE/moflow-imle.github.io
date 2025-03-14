@@ -16,22 +16,21 @@
       color: transparent;
       font-weight: bold;
     }
+    .math-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 10px auto;
+    border: 2px solid #333;
+  }
   </style>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
-  
   <!-- Latex -->
   <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -123,7 +122,7 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href=""
+                <a href="https://arxiv.org/pdf/2503.09950"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -132,7 +131,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href=""
+                <a href="https://arxiv.org/abs/2503.09950"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -323,69 +322,72 @@
     </div> -->
     <!--/ Matting. -->
 
-    <!-- Animation. -->
-    <!-- <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Animation</h2> -->
-
-        <!-- Forward and backward process. -->
-        <!-- <h3 class="title is-4">Interpolating states</h3>
-        <div class="content has-text-justified">
-          <p>
-            We can also animate the scene by interpolating the deformation latent codes of two input
-            frames. Use the slider here to linearly interpolate between the left frame and the right
-            frame.
-          </p>
-        </div>
-        <div class="columns is-vcentered interpolation-panel">
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_start.jpg"
-                 class="interpolation-image"
-                 alt="Interpolate start reference image."/>
-            <p>Start Frame</p>
+    <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Flow Matching on Trajectories</h2>
+      
+          <!-- Forward and backward process. -->
+          <div class="content has-text-justified">
+            <p>
+              We can simulate the forward and backward process of flow matching by animating a single trajectory between noise and data. Use the slider here to visualize the trajectory at different flow matching time step between the left frame and the right
+              frame.
+            </p>
           </div>
-          <div class="column interpolation-video-column">
-            <div id="interpolation-image-wrapper">
-              Loading...
+      
+          <div class="columns is-vcentered interpolation-panel">
+            <!-- Start Frame -->
+            <div class="column is-3 has-text-centered">
+              <div class="math-circle">\( Y^1 \)</div>
+              <img src="./static/images/interpolate_start.jpg"
+                   class="interpolation-image"
+                   alt="Interpolate start reference image."/>
+              <p>Start Frame</p>
             </div>
-            <input class="slider is-fullwidth is-large is-info"
-                   id="interpolation-slider"
-                   step="1" min="0" max="100" value="0" type="range">
+      
+            <!-- Interpolation slider -->
+            <div class="column interpolation-video-column">
+              <div id="interpolation-image-wrapper">
+                Loading...
+              </div>
+              <input class="slider is-fullwidth is-large is-info"
+                     id="interpolation-slider"
+                     step="1" min="0" max="100" value="0" type="range">
+            </div>
+      
+            <!-- End Frame -->
+            <div class="column is-3 has-text-centered">
+              <div class="math-circle">\( Y^0 \)</div>
+              <img src="./static/images/interpolate_end.jpg"
+                   class="interpolation-image"
+                   alt="Interpolation end reference image."/>
+              <p class="is-bold">End Frame</p>
+            </div>
           </div>
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_end.jpg"
-                 class="interpolation-image"
-                 alt="Interpolation end reference image."/>
-            <p class="is-bold">End Frame</p>
-          </div>
+      
+          <br/>
+          <!--/ Forward and backward process. -->
         </div>
-        <br/> -->
-        <!--/ Forward and backward process. -->
-
-        <!-- Re-rendering. -->
-        <!-- <h3 class="title is-4">Re-rendering the input video</h3>
-        <div class="content has-text-justified">
-          <p>
-            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel
-            viewpoint such as a stabilized camera by playing back the training deformations.
-          </p>
-        </div>
-        <div class="content has-text-centered">
-          <video id="replay-video"
-                 controls
-                 muted
-                 preload
-                 playsinline
-                 width="75%">
-            <source src="./static/videos/replay.mp4"
-                    type="video/mp4">
-          </video>
-        </div> -->
-        <!--/ Re-rendering. -->
-
       </div>
-    </div>
     <!--/ Animation. -->
+
+    <!-- Methodology algorithm carousel -->
+    <!-- <section class="hero is-light is-small">
+        <div class="hero-body">
+          <div class="container">
+            <div id="results-carousel" class="carousel results-carousel">
+              <div class="item item-imle">
+                <img src="./static/images/IMLE_algorithm.png">
+              </div>
+              <div class="item item-moflow-train">
+                <img src="./static/images/MoFlow_training.png">
+              </div>
+              <div class="item item-moflow-inf">
+                <img src="./static/images/MoFlow_sampling.png">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> -->
 
 
     <!-- Video Presentation. -->
@@ -400,11 +402,19 @@
       </div>
     </div>
     </div> -->
-
-
-
-  </div>
+    <!-- <div class="columns is-centered has-text-centered">
+        <div class="column">
+            <div class="content has-text-justified">
+                <p>
+                    You can find more examples in the main paper and the supplementary material.
+                </p>
+            </div>
+        </div>
+    </div>
+  </div> -->
 </section>
+
+
 
 
 <!-- Bibtex reference -->
@@ -424,8 +434,7 @@
 <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
+      <a class="icon-link" href="https://arxiv.org/pdf/2503.09950">
         <i class="fas fa-file-pdf"></i>
       </a>
       <a class="icon-link" href="https://github.com/felix-yuxiang" class="external-link" disabled>

@@ -1,12 +1,12 @@
 window.HELP_IMPROVE_VIDEOJS = false;
 
-var INTERP_BASE = "./static/interpolation/stacked";
-var NUM_INTERP_FRAMES = 240;
+var INTERP_BASE = "./static/interpolation/fm_fwd";
+var NUM_INTERP_FRAMES = 100;
 
 var interp_images = [];
 function preloadInterpolationImages() {
   for (var i = 0; i < NUM_INTERP_FRAMES; i++) {
-    var path = INTERP_BASE + '/' + String(i).padStart(6, '0') + '.jpg';
+    var path = INTERP_BASE + '/' + String(i).padStart(3, '0') + '.jpg';
     interp_images[i] = new Image();
     interp_images[i].src = path;
   }
@@ -31,7 +31,7 @@ $(document).ready(function() {
 
     var options = {
 			slidesToScroll: 1,
-			slidesToShow: 3,
+			slidesToShow: 2,
 			loop: true,
 			infinite: true,
 			autoplay: false,
