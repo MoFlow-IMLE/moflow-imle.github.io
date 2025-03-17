@@ -97,9 +97,9 @@
           <h1 class="title is-2 publication-title"> <span class="gradient-text">MoFlow</span>: One-Step Flow Matching for Human Trajectory Forecasting via Implicit Maximum Likelihood Estimation based Distillation</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://felix-yuxiang.github.io/">Yuxiang Fu</a><sup>1,2</sup>,</span>
+              <a href="https://felix-yuxiang.github.io/">Yuxiang Fu</a><sup>1,2,*</sup>,</span>
             <span class="author-block">
-              <a href="https://qiyan98.github.io/">Qi Yan</a><sup>1,2</sup>,</span>
+              <a href="https://qiyan98.github.io/">Qi Yan</a><sup>1,2,*</sup>,</span>
             <span class="author-block">
               <a href="https://sites.google.com/site/wanglele1986/">Lele Wang</a><sup>1</sup>,
             </span>
@@ -285,51 +285,13 @@
   <div class="container is-max-desktop">
 
     <div class="columns is-centered">
-
-      <!-- Visual Effects. -->
-      <!-- <div class="column">
-        <div class="content">
-          <h2 class="title is-3">Main Framework</h2>
-          <p>
-            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-            would be impossible without nerfies since it would require going through a wall.
-          </p>
-          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dollyzoom-stacked.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div> -->
-      <!--/ Visual Effects. -->
-
-      <!-- Matting. -->
-      <!-- <div class="column">
-        <h2 class="title is-3">Matting</h2>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              As a byproduct of our method, we can also solve the matting problem by ignoring
-              samples that fall outside of a bounding box during rendering.
-            </p>
-            <video id="matting-video" controls playsinline height="100%">
-              <source src="./static/videos/matting.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-
-        </div>
-      </div>
-    </div> -->
-    <!--/ Matting. -->
-
-    <div class="columns is-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3">Flow Matching on Trajectories</h2>
+          <h2 class="title is-3">Flow Matching in <span class="gradient-text">MoFlow</span></h2>
       
           <!-- Forward and backward process. -->
           <div class="content has-text-justified">
             <p>
-              We can simulate the forward and backward process of flow matching by animating a single trajectory between noise and data. Use the slider here to visualize the trajectory at different flow matching time step between the left frame and the right
+              We can simulate the forward and backward process of flow matching by animating the transition a single trajectory between noise and data. Use the slider here to visualize the trajectory at different flow matching time step between the left frame and the right
               frame.
             </p>
           </div>
@@ -341,7 +303,7 @@
               <img src="./static/images/interpolate_start.jpg"
                    class="interpolation-image"
                    alt="Interpolate start reference image."/>
-              <p>Start Frame</p>
+              <p>Clean trajectory</p>
             </div>
       
             <!-- Interpolation slider -->
@@ -360,7 +322,7 @@
               <img src="./static/images/interpolate_end.jpg"
                    class="interpolation-image"
                    alt="Interpolation end reference image."/>
-              <p class="is-bold">End Frame</p>
+              <p class="is-bold">Noisy trajectory</p>
             </div>
           </div>
       
@@ -414,21 +376,170 @@
   </div> -->
 </section>
 
-
+<section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <!-- Three Columns of Videos -->
+        <div class="columns">
+          <!-- LED Videos Column -->
+          <div class="column">
+            <h2 class="title is-3 has-text-centered">Leapfrog Diffusion</h2>
+            <div class="content">
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/led/LED_scene_0_agent_0.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/led/LED_scene_2_agent_8.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/led/LED_scene_3_agent_0.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/led/LED_scene_4_agent_10.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/led/LED_scene_4_agent_2.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/led/LED_scene_4_agent_5.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/led/LED_scene_5_agent_10.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/led/LED_scene_5_agent_8.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+          <!-- MoFlow Videos Column -->
+          <div class="column">
+            <h2 class="title is-3 has-text-centered"><span class="gradient-text">MoFlow</span></h2>
+            <div class="content">
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/moflow/MoFlow_scene_0_agent_0.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/moflow/MoFlow_scene_2_agent_8.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/moflow/MoFlow_scene_3_agent_0.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/moflow/MoFlow_scene_4_agent_10.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/moflow/MoFlow_scene_4_agent_2.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/moflow/MoFlow_scene_4_agent_5.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/moflow/MoFlow_scene_5_agent_10.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/moflow/MoFlow_scene_5_agent_8.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+          <!-- MoFlow-IMLE Videos Column -->
+          <div class="column">
+            <h2 class="title is-3 has-text-centered"><span class="gradient-text">MoFlow</span>-IMLE</h2>
+            <div class="content">
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/imle/imle_scene_0_agent_0.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/imle/imle_scene_2_agent_8.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/imle/imle_scene_3_agent_0.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/imle/imle_scene_4_agent_10.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/imle/imle_scene_4_agent_2.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/imle/imle_scene_4_agent_5.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/imle/imle_scene_5_agent_10.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="video-wrapper" style="overflow: hidden; position: relative;">
+                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
+                  <source src="./static/videos/imle/imle_scene_5_agent_8.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Paragraph at the Bottom -->
+      <p class="subtitle has-text-centered" style="margin-top: 1.5rem;">Qualitative results on the NBA SportVU dataset.</p>
+    </div>
+  </section>
 
 
 <!-- Bibtex reference -->
-<!-- <section class="section" id="BibTeX">
+
+<section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{park2021nerfies,
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
+    <pre><code>@article{fu2025moflowonestepflowmatching,
+  author    = {Fu, Yuxiang, Yan, Qi, Wang, Lele, Li, Ke and Liao, Renjie},
+  title     = {MoFlow: One-Step Flow Matching for Human Trajectory Forecasting via Implicit Maximum Likelihood Estimation based Distillation},
+  journal   = {CVPR},
+  year      = {2025},
 }</code></pre>
   </div>
-</section> -->
+</section>
 
 
 <footer class="footer">
@@ -439,6 +550,9 @@
       </a>
       <a class="icon-link" href="https://github.com/felix-yuxiang" class="external-link" disabled>
         <i class="fab fa-github"></i>
+      </a>
+      <a class="icon-link" href="https://felix-yuxiang.github.io">
+        <i class="fas fa-home"></i>
       </a>
     </div>
     <div class="columns is-centered">
