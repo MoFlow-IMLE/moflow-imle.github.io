@@ -1,167 +1,171 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <meta name="description"
+    <meta charset="utf-8">
+    <meta name="description"
         content="One-Step Flow Matching for Human Trajectory Forecasting via Implicit Maximum Likelihood Estimation based Distillation">
-  <meta name="keywords" content="Diffusion distillation,IMLE,flow matching">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MoFlow: One-Step Flow Matching for Human Trajectory Forecasting via Implicit Maximum Likelihood Estimation based Distillation</title>
-  <style>
-    /* Apply cool gradient to the "MoFlow" part */
-    .gradient-text {
-      background: linear-gradient(to right, cyan, magenta);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      font-weight: bold;
-    }
-    .math-circle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background-color: #f5f5f5;
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0 auto 10px auto;
-    border: 2px solid #333;
-  }
-  </style>
+    <meta name="keywords" content="Diffusion distillation,IMLE,flow matching">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MoFlow: One-Step Flow Matching for Human Trajectory Forecasting via Implicit Maximum Likelihood Estimation
+        based Distillation</title>
+    <style>
+        /* Apply cool gradient to the "MoFlow" part */
+        .gradient-text {
+            background: linear-gradient(to right, cyan, magenta);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: bold;
+        }
 
-  <!-- Latex -->
-  <script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-  </script>
+        .math-circle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #f5f5f5;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 10px auto;
+            border: 2px solid #333;
+        }
+    </style>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+    <!-- Latex -->
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="./static/images/favicon.svg">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
 </head>
+
 <body>
 
-<!-- Define nav bars  -->
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://felix-yuxiang.github.io/">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item">
-            Coming Soon...
-          </a>
+    <!-- Define nav bars  -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
         </div>
-      </div>
-    </div>
-
-  </div>
-</nav>
-
-
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-2 publication-title"> <span class="gradient-text">MoFlow</span>: One-Step Flow Matching for Human Trajectory Forecasting via Implicit Maximum Likelihood Estimation based Distillation</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://felix-yuxiang.github.io/">Yuxiang Fu</a><sup>1,2,*</sup>,</span>
-            <span class="author-block">
-              <a href="https://qiyan98.github.io/">Qi Yan</a><sup>1,2,*</sup>,</span>
-            <span class="author-block">
-              <a href="https://sites.google.com/site/wanglele1986/">Lele Wang</a><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://www.sfu.ca/~keli/">Ke Li</a><sup>3</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://lrjconan.github.io/">Renjie Liao</a><sup>1,2</sup>
-            </span>
-          </div>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>University of British Columbia,</span>
-            <span class="author-block"><sup>2</sup>Vector Institute for AI,</span>
-            <span class="author-block"><sup>3</sup>Simon Fraser University</span>
-            <br> <span class="author-block" style="color: red">Computer Vision and Pattern Recognition Conference (CVPR) 2025</span> 
-          </div>
-
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://arxiv.org/pdf/2503.09950"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2503.09950"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                  <a href="https://github.com/felix-yuxiang/MoFlow"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                      </span>
-                      <span>Code</span>
-                      </a>
-                      </span>
-
-                <!-- Video Link. -->
-                <span class="link-block">
-                <a href=""
-                    class="external-link button is-normal is-rounded is-dark">
+        <div class="navbar-menu">
+            <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+                <a class="navbar-item" href="https://felix-yuxiang.github.io/">
                     <span class="icon">
-                        <i class="fab fa-youtube"></i>
+                        <i class="fas fa-home"></i>
                     </span>
-                    <span>Video</span>
                 </a>
-                </span>
-              <!-- Dataset Link. -->
-              <!-- <span class="link-block">
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        More Research
+                    </a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">
+                            Coming Soon...
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-2 publication-title"> <span class="gradient-text">MoFlow</span>: One-Step
+                            Flow Matching for Human Trajectory Forecasting via Implicit Maximum Likelihood Estimation
+                            based Distillation</h1>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <a href="https://felix-yuxiang.github.io/">Yuxiang Fu</a><sup>1,2,*</sup>,</span>
+                            <span class="author-block">
+                                <a href="https://qiyan98.github.io/">Qi Yan</a><sup>1,2,*</sup>,</span>
+                            <span class="author-block">
+                                <a href="https://sites.google.com/site/wanglele1986/">Lele Wang</a><sup>1</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://www.sfu.ca/~keli/">Ke Li</a><sup>3</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://lrjconan.github.io/">Renjie Liao</a><sup>1,2</sup>
+                            </span>
+                        </div>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block"><sup>1</sup>University of British Columbia,</span>
+                            <span class="author-block"><sup>2</sup>Vector Institute for AI,</span>
+                            <span class="author-block"><sup>3</sup>Simon Fraser University</span>
+                            <br> <span class="author-block" style="color: red">Computer Vision and Pattern Recognition
+                                Conference (CVPR) 2025</span>
+                        </div>
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <!-- PDF Link. -->
+                                <span class="link-block">
+                                    <a href="https://arxiv.org/pdf/2503.09950"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </span>
+                                        <span>Paper</span>
+                                    </a>
+                                </span>
+                                <span class="link-block">
+                                    <a href="https://arxiv.org/abs/2503.09950"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="ai ai-arxiv"></i>
+                                        </span>
+                                        <span>arXiv</span>
+                                    </a>
+                                </span>
+                                <!-- Code Link. -->
+                                <span class="link-block">
+                                    <a href="https://github.com/felix-yuxiang/MoFlow"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-github"></i>
+                                        </span>
+                                        <span>Code</span>
+                                    </a>
+                                </span>
+
+                                <!-- Video Link. -->
+                                <span class="link-block">
+                                    <a href="" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-youtube"></i>
+                                        </span>
+                                        <span>Video</span>
+                                    </a>
+                                </span>
+                                <!-- Dataset Link. -->
+                                <!-- <span class="link-block">
                 <a href="https://github.com/felix-yuxiang/MoFlow"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -169,18 +173,18 @@
                   </span>
                   <span>Data</span>
                   </a> -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
 
-<!-- This demos how to code a carousel -->
-<!-- <section class="hero is-light is-small">
+    <!-- This demos how to code a carousel -->
+    <!-- <section class="hero is-light is-small">
   <div class="hero-body">
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
@@ -238,102 +242,112 @@
 </section> -->
 
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Human trajectory forecasting poses a challenge to predict the inherently multi-modal future movements of individuals based on their past trajectories and relevant contextual cues. 
-          </p>
-          <p>
-            We tackle this challenge by proposing a novel <b>Mo</b>tion prediction conditional <b>Flow</b> matching model, termed <span class="gradient-text">MoFlow</span>, to generate K-shot future trajectories for all agents in a given scene. 
-            Additionally, we design a novel flow matching loss function that not only ensures at least one of the \( K \) sets of future trajectories is accurate but also encourages all \(K\) sets of future trajectories to be diverse and plausible.
-          </p>
-          <p>
-            Furthermore, by leveraging the <b>Implicit Maximum Likelihood Estimation</b> (IMLE), we propose a novel distillation method for flow models that only requires samples from the teacher model.
-          </p>
-          <p>
-            Extensive experiments on the real-world datasets, including <b>SportVU NBA games, ETH-UCY, and SDD</b>, demonstrate that both our teacher flow model and the IMLE-distilled student model achieve state-of-the-art performance. These models can generate diverse trajectories that are physically and socially plausible.
-            Moreover, our one-step student model is <b>100</b> times faster than the teacher flow model during sampling. &#128640;&#128640;&#128640; 
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Abstract. -->
-</section>
-
-<!-- Put a mp4 video here with title main framework, make it center -->
-<section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column is-flex is-flex-direction-column is-align-items-center">
-          <h2 class="title is-3">Main Framework</h2>
-          <video id="main-framework" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/MoFlow-IMLE-video.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  
-<section class="section">
-  <div class="container is-max-desktop">
-
-    <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">Flow Matching in <span class="gradient-text">MoFlow</span></h2>
-      
-          <!-- Forward and backward process. -->
-          <div class="content has-text-justified">
-            <p>
-              We can simulate the forward and backward process of flow matching by animating the transition a single trajectory between noise and data. Use the slider here to visualize the trajectory at different flow matching time step between the left frame and the right
-              frame.
-            </p>
-          </div>
-      
-          <div class="columns is-vcentered interpolation-panel">
-            <!-- Start Frame -->
-            <div class="column is-3 has-text-centered">
-              <div class="math-circle">\( Y^1 \)</div>
-              <img src="./static/images/interpolate_start.jpg"
-                   class="interpolation-image"
-                   alt="Interpolate start reference image."/>
-              <p>Clean trajectory</p>
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Human trajectory forecasting poses a challenge to predict the inherently multi-modal future
+                            movements of individuals based on their past trajectories and relevant contextual cues.
+                        </p>
+                        <p>
+                            We tackle this challenge by proposing a novel <b>Mo</b>tion prediction conditional
+                            <b>Flow</b> matching model, termed <span class="gradient-text">MoFlow</span>, to generate
+                            K-shot future trajectories for all agents in a given scene.
+                            Additionally, we design a novel flow matching loss function that not only ensures at least
+                            one of the \( K \) sets of future trajectories is accurate but also encourages all \(K\)
+                            sets of future trajectories to be diverse and plausible.
+                        </p>
+                        <p>
+                            Furthermore, by leveraging the <b>Implicit Maximum Likelihood Estimation</b> (IMLE), we
+                            propose a novel distillation method for flow models that only requires samples from the
+                            teacher model.
+                        </p>
+                        <p>
+                            Extensive experiments on the real-world datasets, including <b>SportVU NBA games, ETH-UCY,
+                                and SDD</b>, demonstrate that both our teacher flow model and the IMLE-distilled student
+                            model achieve state-of-the-art performance. These models can generate diverse trajectories
+                            that are physically and socially plausible.
+                            Moreover, our one-step student model is <b>100</b> times faster than the teacher flow model
+                            during sampling. &#128640;&#128640;&#128640;
+                        </p>
+                    </div>
+                </div>
             </div>
-      
-            <!-- Interpolation slider -->
-            <div class="column interpolation-video-column">
-              <div id="interpolation-image-wrapper">
-                Loading...
-              </div>
-              <input class="slider is-fullwidth is-large is-info"
-                     id="interpolation-slider"
-                     step="1" min="0" max="100" value="0" type="range">
-            </div>
-      
-            <!-- End Frame -->
-            <div class="column is-3 has-text-centered">
-              <div class="math-circle">\( Y^0 \)</div>
-              <img src="./static/images/interpolate_end.jpg"
-                   class="interpolation-image"
-                   alt="Interpolation end reference image."/>
-              <p class="is-bold">Noisy trajectory</p>
-            </div>
-          </div>
-      
-          <br/>
-          <!--/ Forward and backward process. -->
-        </div>
-      </div>
-    <!--/ Animation. -->
+            <!--/ Abstract. -->
+    </section>
 
-    <!-- Methodology algorithm carousel -->
-    <!-- <section class="hero is-light is-small">
+    <!-- Put a mp4 video here with title main framework, make it center -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-flex is-flex-direction-column is-align-items-center">
+                    <h2 class="title is-3">Main Framework</h2>
+                    <video id="main-framework" autoplay controls muted loop playsinline height="100%">
+                        <source src="./static/videos/MoFlow-IMLE-video.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section">
+        <div class="container is-max-desktop">
+
+            <div class="columns is-centered">
+                <div class="column is-full-width">
+                    <h2 class="title is-3">Flow Matching in <span class="gradient-text">MoFlow</span></h2>
+
+                    <!-- Forward and backward process. -->
+                    <div class="content has-text-justified">
+                        <p>
+                            We can simulate the forward and backward process of flow matching by animating the
+                            transition a single trajectory between noise and data. Use the slider here to visualize the
+                            trajectory at different flow matching time step between noise distribution \(Y^0\) and data
+                            distribution \(Y^1\).
+
+                        </p>
+                    </div>
+
+                    <div class="columns is-vcentered interpolation-panel">
+                        <!-- Start Frame -->
+                        <div class="column is-3 has-text-centered">
+                            <div class="math-circle">\( Y^1 \)</div>
+                            <img src="./static/images/interpolate_start.jpg" class="interpolation-image"
+                                alt="Interpolate start reference image." />
+                            <p>Clean trajectory</p>
+                        </div>
+
+                        <!-- Interpolation slider -->
+                        <div class="column interpolation-video-column">
+                            <div id="interpolation-image-wrapper">
+                                Loading...
+                            </div>
+                            <input class="slider is-fullwidth is-large is-info" id="interpolation-slider" step="1"
+                                min="0" max="100" value="0" type="range">
+                        </div>
+
+                        <!-- End Frame -->
+                        <div class="column is-3 has-text-centered">
+                            <div class="math-circle">\( Y^0 \)</div>
+                            <img src="./static/images/interpolate_end.jpg" class="interpolation-image"
+                                alt="Interpolation end reference image." />
+                            <p class="is-bold">Noisy trajectory</p>
+                        </div>
+                    </div>
+
+                    <br />
+                    <!--/ Forward and backward process. -->
+                </div>
+            </div>
+            <!--/ Animation. -->
+
+            <!-- Methodology algorithm carousel -->
+            <!-- <section class="hero is-light is-small">
         <div class="hero-body">
           <div class="container">
             <div id="results-carousel" class="carousel results-carousel">
@@ -352,8 +366,8 @@
       </section> -->
 
 
-    <!-- Video Presentation. -->
-    <!-- <div class="columns is-centered">
+            <!-- Video Presentation. -->
+            <!-- <div class="columns is-centered">
         <div class="column is-full-width">
           <h2 class="title is-3">Video Presentation</h2>
           <div class="publication-video">
@@ -364,7 +378,7 @@
       </div>
     </div>
     </div> -->
-    <!-- <div class="columns is-centered has-text-centered">
+            <!-- <div class="columns is-centered has-text-centered">
         <div class="column">
             <div class="content has-text-justified">
                 <p>
@@ -374,199 +388,170 @@
         </div>
     </div>
   </div> -->
-</section>
+    </section>
 
-<section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <!-- Three Columns of Videos -->
-        <div class="columns">
-          <!-- LED Videos Column -->
-          <div class="column">
-            <h2 class="title is-3 has-text-centered">Leapfrog Diffusion</h2>
-            <div class="content">
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/led/LED_scene_0_agent_0.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/led/LED_scene_2_agent_8.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/led/LED_scene_3_agent_0.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/led/LED_scene_4_agent_10.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/led/LED_scene_4_agent_2.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/led/LED_scene_4_agent_5.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/led/LED_scene_5_agent_10.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/led/LED_scene_5_agent_8.mp4" type="video/mp4">
-                </video>
-              </div>
+
+    <section class="hero is-light is-small">
+        <div class="hero-body">
+            <h2 class="title is-3 has-text-centered">Animation on NBA SportVU dataset</h2>
+            <div class="container">
+                <div id="results-carousel" class="carousel results-carousel">
+
+                    <!-- Scene 0 Agent 0 -->
+                    <div class="item item-00">
+                        <div class="container is-max-desktop">
+                            <div class="video-wrapper"
+                                style="overflow: hidden; position: relative; padding-top: 56.25%;">
+                                <video muted loop playsinline controls
+                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                    <source src="./static/videos/scene_0_agent_0.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scene 2 Agent 8 -->
+                    <div class="item item-28">
+                        <div class="container is-max-desktop">
+                            <div class="video-wrapper"
+                                style="overflow: hidden; position: relative; padding-top: 56.25%;">
+                                <video muted loop playsinline controls
+                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                    <source src="./static/videos/scene_2_agent_8.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scene 3 Agent 0 -->
+                    <div class="item item-30">
+                        <div class="container is-max-desktop">
+                            <div class="video-wrapper"
+                                style="overflow: hidden; position: relative; padding-top: 56.25%;">
+                                <video muted loop playsinline controls
+                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                    <source src="./static/videos/scene_3_agent_0.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scene 4 Agent 2 -->
+                    <div class="item item-42">
+                        <div class="container is-max-desktop">
+                            <div class="video-wrapper"
+                                style="overflow: hidden; position: relative; padding-top: 56.25%;">
+                                <video muted loop playsinline controls
+                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                    <source src="./static/videos/scene_4_agent_2.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scene 4 Agent 5 -->
+                    <div class="item item-45">
+                        <div class="container is-max-desktop">
+                            <div class="video-wrapper"
+                                style="overflow: hidden; position: relative; padding-top: 56.25%;">
+                                <video muted loop playsinline controls
+                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                    <source src="./static/videos/scene_4_agent_5.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scene 4 Agent 10 -->
+                    <div class="item item-410">
+                        <div class="container is-max-desktop">
+                            <div class="video-wrapper"
+                                style="overflow: hidden; position: relative; padding-top: 56.25%;">
+                                <video muted loop playsinline controls
+                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                    <source src="./static/videos/scene_4_agent_10.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scene 5 Agent 8 -->
+                    <div class="item item-58">
+                        <div class="container is-max-desktop">
+                            <div class="video-wrapper"
+                                style="overflow: hidden; position: relative; padding-top: 56.25%;">
+                                <video muted loop playsinline controls
+                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                    <source src="./static/videos/scene_5_agent_8.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scene 5 Agent 10 -->
+                    <div class="item item-510">
+                        <div class="container is-max-desktop">
+                            <div class="video-wrapper"
+                                style="overflow: hidden; position: relative; padding-top: 56.25%;">
+                                <video muted loop playsinline controls
+                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                    <source src="./static/videos/scene_5_agent_10.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          </div>
-          <!-- MoFlow Videos Column -->
-          <div class="column">
-            <h2 class="title is-3 has-text-centered"><span class="gradient-text">MoFlow</span></h2>
-            <div class="content">
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/moflow/MoFlow_scene_0_agent_0.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/moflow/MoFlow_scene_2_agent_8.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/moflow/MoFlow_scene_3_agent_0.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/moflow/MoFlow_scene_4_agent_10.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/moflow/MoFlow_scene_4_agent_2.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/moflow/MoFlow_scene_4_agent_5.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/moflow/MoFlow_scene_5_agent_10.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/moflow/MoFlow_scene_5_agent_8.mp4" type="video/mp4">
-                </video>
-              </div>
-            </div>
-          </div>
-          <!-- MoFlow-IMLE Videos Column -->
-          <div class="column">
-            <h2 class="title is-3 has-text-centered"><span class="gradient-text">MoFlow</span>-IMLE</h2>
-            <div class="content">
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/imle/imle_scene_0_agent_0.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/imle/imle_scene_2_agent_8.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/imle/imle_scene_3_agent_0.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/imle/imle_scene_4_agent_10.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/imle/imle_scene_4_agent_2.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/imle/imle_scene_4_agent_5.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/imle/imle_scene_5_agent_10.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="video-wrapper" style="overflow: hidden; position: relative;">
-                <video autoplay muted loop playsinline controls width="100%" style="transform: scale(1.4); transform-origin: center center; display: block;">
-                  <source src="./static/videos/imle/imle_scene_5_agent_8.mp4" type="video/mp4">
-                </video>
-              </div>
-            </div>
-          </div>
+            <p class="subtitle has-text-centered" style="margin-top: 1.5rem;">From left to right, the results displayed correspond to <b>Leapfrog Diffusion,  <span class="gradient-text">MoFlow</span>, <span class="gradient-text">MoFlow</span>-IMLE</b> respectively.</p>
         </div>
-      </div>
-      <!-- Paragraph at the Bottom -->
-      <p class="subtitle has-text-centered" style="margin-top: 1.5rem;">Qualitative results on the NBA SportVU dataset.</p>
-    </div>
-  </section>
+    </section>
 
+    <!-- Bibtex reference -->
 
-<!-- Bibtex reference -->
-
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@inproceedings{fu2025moflowonestepflowmatching,
-  author    = {Fu, Yuxiang, Yan, Qi, Wang, Lele, Li, Ke and Liao, Renjie},
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title">BibTeX</h2>
+            <pre><code>@inproceedings{fu2025moflowonestepflowmatching,
+  author    = {Fu, Yuxiang and Yan, Qi and Wang, Lele and Li, Ke and Liao, Renjie},
   title     = {MoFlow: One-Step Flow Matching for Human Trajectory Forecasting via Implicit Maximum Likelihood Estimation based Distillation},
   journal   = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
   year      = {2025},
 }</code></pre>
-  </div>
-</section>
-
-
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link" href="https://arxiv.org/pdf/2503.09950">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/felix-yuxiang" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-      <a class="icon-link" href="https://felix-yuxiang.github.io">
-        <i class="fas fa-home"></i>
-      </a>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted by the&nbsp;<a href="https://nerfies.github.io" target="_blank">Nerfies</a>&nbsp;project page.
-            <br> This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
         </div>
-      </div>
-    </div>
-  </div>
-</footer>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="content has-text-centered">
+                <a class="icon-link" href="https://arxiv.org/pdf/2503.09950">
+                    <i class="fas fa-file-pdf"></i>
+                </a>
+                <a class="icon-link" href="https://github.com/felix-yuxiang" class="external-link" disabled>
+                    <i class="fab fa-github"></i>
+                </a>
+                <a class="icon-link" href="https://felix-yuxiang.github.io">
+                    <i class="fas fa-home"></i>
+                </a>
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="content">
+                        This page was built using the <a
+                            href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                            target="_blank">Academic Project Page Template</a> which was adopted by the&nbsp;<a
+                            href="https://nerfies.github.io" target="_blank">Nerfies</a>&nbsp;project page.
+                        <br> This website is licensed under a <a rel="license"
+                            href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                            Commons Attribution-ShareAlike 4.0 International License</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 </body>
+
 </html>
