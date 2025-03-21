@@ -308,7 +308,7 @@
                             We can simulate the forward and backward process of flow matching by animating the
                             transition a single trajectory between noise and data. Use the slider here to visualize the
                             trajectory at different flow matching time step between noise distribution \(Y^0\) and data
-                            distribution \(Y^1\).
+                            distribution \(Y^1\). Check out our paper to see how we train and sample from the conditional flow-matching model.
 
                         </p>
                     </div>
@@ -346,25 +346,6 @@
             </div>
             <!--/ Animation. -->
 
-            <!-- Methodology algorithm carousel -->
-            <!-- <section class="hero is-light is-small">
-        <div class="hero-body">
-          <div class="container">
-            <div id="results-carousel" class="carousel results-carousel">
-              <div class="item item-imle">
-                <img src="./static/images/IMLE_algorithm.png">
-              </div>
-              <div class="item item-moflow-train">
-                <img src="./static/images/MoFlow_training.png">
-              </div>
-              <div class="item item-moflow-inf">
-                <img src="./static/images/MoFlow_sampling.png">
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> -->
-
 
             <!-- Video Presentation. -->
             <!-- <div class="columns is-centered">
@@ -390,7 +371,58 @@
   </div> -->
     </section>
 
+    <!-- IMLE -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <h2 class="title is-3">IMLE Module</h2>
+    
+            <div class="columns is-vcentered is-variable is-6 is-multiline">
+                <!-- Image Column (Left, full width on mobile) -->
+                <div class="column is-full-mobile is-one-third-tablet is-one-third-desktop">
+                    <figure class="image">
+                        <img src="static/images/IMLE_algorithm.png" alt="IMLE Algorithm Diagram" style="width: 100%; height: auto; margin-bottom: 3rem;">
+                        <img src="static/images/IMLE_overview.png" alt="">
+                    </figure>
+                </div>
+    
+                <!-- Text Column (Right, full width on mobile) -->
+                <div class="column is-full-mobile is-two-thirds-tablet is-two-thirds-desktop">
+                    <div class="content">
+                        <p>
+                            The IMLE distillation process is outlined in <code>Algorithm 1</code>.
+                            Specifically, lines 4–6 describe the standard ODE-based sampling of the teacher model, <span class="gradient-text">MoFlow</span>. This produces \( K \) correlated multi-modal trajectory predictions
+                            \( \hat{Y}^1_{1:K} \) conditioned on the context \( C \). A conditional IMLE generator \( G_\phi \) then uses a noise
+                            vector \( Z \) and context \( C \) to generate \( K \)-component trajectories
+                            \( \Gamma \), matching the shape of \( \hat{Y}^1_{1:K} \).
+                        </p>
+    
+                        <p>
+                            The conditional IMLE objective generates <b>more</b> samples than those in the distillation dataset for the same context \( C \).
+                            Specifically, \( m \) i.i.d. samples are drawn via \( G_\phi \), and the one closest to the teacher prediction \( \hat{Y}^1_{1:K} \) is selected for loss computation.
+                            This minimizes the distance to the nearest student sample, ensuring the teacher model’s mode is well-approximated.
+                        </p>
+    
+                        <p>
+                            To preserve trajectory prediction multi-modality, we employ the Chamfer distance as the loss function
+                        </p>
+    
+                        <div class="math-block">
+                            \[
+                            \mathcal{L}_{\text{IMLE}}(\hat{Y}^1_{1:K}, \Gamma) = \dfrac{1}{K} \left( \sum_{i=1}^K \min_j \|\hat{Y}^1_i - \Gamma^{(j)}\| + \sum_{j=1}^K \min_i \|\hat{Y}^1_i - \Gamma^{(j)}\| \right),
+                            \]
+                        </div>
+    
+                        <p>
+                            where \( \Gamma^{(i)} \in \mathbb{R}^{A \times 2T_f} \) is the \( i \)-th component of the IMLE-generated correlated trajectory.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
 
+<!-- NBA -->
     <section class="hero is-light is-small">
         <div class="hero-body">
             <h2 class="title is-3 has-text-centered">Animation on NBA SportVU dataset</h2>
@@ -503,9 +535,82 @@
 
                 </div>
             </div>
-            <p class="subtitle has-text-centered" style="margin-top: 1.5rem;">From left to right, the results displayed correspond to <b>Leapfrog Diffusion,  <span class="gradient-text">MoFlow</span>, <span class="gradient-text">MoFlow</span>-IMLE</b> respectively.</p>
+            <p class="subtitle has-text-centered" style="margin-top: 1.5rem;margin-bottom: 3rem;">From left to right, the results displayed correspond to <b>Leapfrog Diffusion,  <span class="gradient-text">MoFlow</span>, <span class="gradient-text">MoFlow</span>-IMLE</b> respectively.</p>
         </div>
     </section>
+
+    <!-- ETH-UCY -->
+    <section class="hero is-dark">
+        <div class="hero-body">
+          <div class="container">
+            <h2 class="title is-3 has-text-centered" style="margin-bottom: 3rem;">Animation on ETH-UCY dataset</h2>
+            <div class="columns is-gapless is-mobile">
+              <div class="column has-text-centered">
+                <video 
+                  controls 
+                  loop 
+                  playsinline>
+                  <source src="static/videos/eth_moflow_1_1050.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <video 
+                  controls 
+                  loop 
+                  playsinline>
+                  <source src="static/videos/eth_hotel_moflow_11_540.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <video 
+                  controls 
+                  loop 
+                  playsinline>
+                  <source src="static/videos/eth_zara1_moflow_5_50.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <video 
+                  controls 
+                  loop 
+                  playsinline>
+                  <source src="static/videos/eth_zara2_moflow_7_80.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <p style="font-size: 2rem;"><span class="gradient-text">MoFlow</span></p>
+              </div>
+              <div class="column has-text-centered">
+                <video 
+                  controls 
+                  loop 
+                  playsinline>
+                  <source src="static/videos/eth_imle_19_1050.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <video 
+                  controls 
+                  loop 
+                  playsinline>
+                  <source src="static/videos/eth_hotel_imle_19_540.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <video 
+                  controls 
+                  loop 
+                  playsinline>
+                  <source src="static/videos/eth_zara1_imle_19_50.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <video 
+                  controls 
+                  loop 
+                  playsinline>
+                  <source src="static/videos/eth_zara2_imle_19_80.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <p style="font-size: 2rem;"><span class="gradient-text">MoFlow</span>-IMLE</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
     <!-- Bibtex reference -->
 
