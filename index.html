@@ -246,7 +246,7 @@
 
                     <!-- Forward and backward process. -->
                     <div class="content has-text-justified">
-                        <p>In terms of the forward process in flow matching, we adopt a simple linear interpolation between the clean trajectories \(Y^1\) and pure noise \(Y^0\sim \mathcal{N}(\mathbf{0},\mathbf{I})\),
+                        <p>In terms of the forward process in flow matching, we adopt a simple linear interpolation between the clean trajectories \(Y^1\sim q\) and pure noise \(Y^0\sim \mathcal{N}(\mathbf{0},\mathbf{I})\),
                             <div class="math-block">
                                 \[
                                 Y^t = (1-t)Y^0 + tY^1 \qquad t \in [0, 1].
@@ -335,14 +335,14 @@
                 <p>By rearranging the original linear flow objective, we introduce a neural network \(D_\theta:=Y^t+(1-t)v_\theta(Y^t, C, t) \) that matches the future trajectory \(Y^1\) in the data space and the objective turns into
                     <div class="math-block">
                         \[
-                        \mathcal{L}_{\text{FM}} = \mathbb{E}_{Y^t, Y^1, t} \left[ \frac{\| D_{\theta}(Y^t, C, t) - Y^1 \|_2^2}{(1 - t)^2} \right].
+                        \mathcal{L}_{\text{FM}} = \mathbb{E}_{Y^t, Y^1\sim q, t\sim \mathcal{U}[0,1]} \left[ \frac{\| D_{\theta}(Y^t, C, t) - Y^1 \|_2^2}{(1 - t)^2} \right].
                         \]
                     </div> 
                     To promote the multi-modality of the future trajectory, we design a novel loss function. Specifically, our \(D_\theta\) generates \(K\) scene-level correlated waypoint predictions, denoted by \(\{S_i\}^K_{i=1}\), alongside
                     corrresponding classification logits \(\{\zeta_i\}_{i=1}^K\). For simplicity, we omit the time-dependent coefficient and obtain a new loss \(\bar{\mathcal{L}}_{\text{FM}}\)
                     <div class="math-block">
                         \[
-                        \bar{\mathcal{L}}_{\text{FM}} = \mathbb{E}_{Y^t, Y^1, t} \left[ \| S_{j^*} - Y^1 \|_2^2 + \text{CE}(\zeta_{1:K}, j^*) \right]
+                        \bar{\mathcal{L}}_{\text{FM}} = \mathbb{E}_{Y^t, Y^1\sim q, t\sim \mathcal{U}[0,1]} \left[ \| S_{j^*} - Y^1 \|_2^2 + \text{CE}(\zeta_{1:K}, j^*) \right]
                         \]
                     </div> where \(j^* = \arg\min_{j} \| S_j - Y^1 \|_2^2\) and \(\text{CE}(\cdot,\cdot)\) is the cross-entropy loss.
                 </p>
