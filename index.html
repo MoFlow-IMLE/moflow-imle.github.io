@@ -32,6 +32,75 @@
             margin: 0 auto 10px auto;
             border: 2px solid #333;
         }
+
+        /* Refined table style for Quantitative Analysis section */
+        .quantitative-carousel .container.is-max-desktop {
+            max-width: 1100px;
+            margin: 0 auto 2.5em auto;
+        }
+
+        .quantitative-carousel .table {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            font-size: 1.18rem;
+        }
+
+        .quantitative-carousel .table th {
+            background: linear-gradient(90deg, #e0e7ff 0%, #f0f7fa 100%);
+            color: #333;
+            font-weight: 600;
+            border-bottom: 2px solid #eaeaea;
+            padding: 1em 0.7em;
+            font-size: 1.15em;
+        }
+
+        .quantitative-carousel .table td {
+            padding: 1em 0.7em;
+            border-bottom: 1px solid #f3f3f3;
+            vertical-align: middle;
+            font-size: 1.08em;
+        }
+
+        .quantitative-carousel .table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .quantitative-carousel .table tbody tr:hover {
+            background: #f6faff;
+            transition: background 0.2s;
+        }
+
+        .quantitative-carousel .table th,
+        .quantitative-carousel .table td {
+            text-align: center;
+        }
+
+        /* Add extra space below the table for carousel dots */
+        .quantitative-carousel .container.is-max-desktop {
+            padding-bottom: 3.5em;
+        }
+
+        .quantitative-carousel {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .quantitative-carousel .item {
+            width: 100%;
+            max-width: 100%;
+            min-width: 100%;
+            box-sizing: border-box;
+            display: block;
+        }
+
+        /* Hide other tables in carousel view */
+        .quantitative-carousel .carousel-items {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow: hidden;
+        }
     </style>
 
     <!-- Latex -->
@@ -304,30 +373,6 @@
                 </div>
             </div>
             <!--/ Animation. -->
-
-
-            <!-- Video Presentation. -->
-            <!-- <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">Video Presentation</h2>
-          <div class="publication-video">
-            <iframe src="..."
-                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div> -->
-            <!-- <div class="columns is-centered has-text-centered">
-        <div class="column">
-            <div class="content has-text-justified">
-                <p>
-                    You can find more examples in the main paper and the supplementary material.
-                </p>
-            </div>
-        </div>
-    </div>
-  </div> -->
     </section>
 
     <!-- MoFlow objective-->
@@ -593,6 +638,235 @@
           </div>
         </div>
       </section>
+
+
+    <!-- Quantitative Analysis Section -->
+    <section class="hero is-light is-small">
+      <div class="hero-body">
+        <h2 class="title is-3 has-text-centered">Quantitative Analysis</h2>
+        <div class="container">
+          <div id="quantitative-carousel" class="carousel quantitative-carousel">
+            <!-- Table 1 -->
+            <div class="item item-table-1">
+              <div class="container is-max-desktop">
+                <h3 class="title is-4" style="text-align:center; margin-bottom:0.5em;">NBA Dataset</h3>
+                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                  <thead>
+                    <tr>
+                    <th>Method</th>
+                    <th>1.0s</th>
+                    <th>2.0s</th>
+                    <th>3.0s</th>
+                    <th>Total (4.0s)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>MemoNet</td>
+                    <td>0.38/0.56</td>
+                    <td>0.71/1.14</td>
+                    <td>1.00/1.57</td>
+                    <td>1.25/1.47</td>
+                    </tr>
+                    <tr>
+                    <td>NPSN</td>
+                    <td>0.35/0.58</td>
+                    <td>0.68/1.23</td>
+                    <td>1.01/1.76</td>
+                    <td>1.31/1.79</td>
+                    </tr>
+                    <tr>
+                    <td>GroupNet</td>
+                    <td>0.26/0.34</td>
+                    <td>0.49/0.70</td>
+                    <td>0.73/1.02</td>
+                    <td>0.96/1.30</td>
+                    </tr>
+                    <tr>
+                    <td>MID</td>
+                    <td>0.28/0.37</td>
+                    <td>0.51/0.72</td>
+                    <td>0.71/0.98</td>
+                    <td>0.96/1.27</td>
+                    </tr>
+                    <tr>
+                    <td>LED<sup>†</sup></td>
+                    <td>0.21/0.28</td>
+                    <td>0.44/0.64</td>
+                    <td>0.69/0.95</td>
+                    <td>0.94/1.21</td>
+                    </tr>
+                    <tr>
+                    <td>LED*</td>
+                    <td><u>0.18/0.27</u></td>
+                    <td><u>0.37/0.56</u></td>
+                    <td><u>0.58/0.84</u></td>
+                    <td><u>0.81/1.16</u></td>
+                    </tr>
+                    <tr>
+                    <td><span class="gradient-text">MoFlow</span></td>
+                    <td><b>0.18/0.25</b></td>
+                    <td><b>0.34/0.46</b></td>
+                    <td><b>0.51/0.67</b></td>
+                    <td><b>0.70</b>/<u>0.88</u></td>
+                    </tr>
+                    <tr>
+                    <td><span class="gradient-text">MoFlow</span>-IMLE</td>
+                    <td><b>0.18/0.25</b></td>
+                    <td><b>0.34/0.47</b></td>
+                    <td><b>0.52/0.67</b></td>
+                    <td><u>0.71</u>/<b>0.86</b></td>
+                    </tr>
+                </tbody>
+                </table>
+                <p class="table-caption" style="margin-top:1em; font-size:1.05em; color:#555; text-align:center;">
+      Comparison with baseline models on NBA dataset. min20ADE/min20FDE (meters) are reported. Bold/underlined fonts represent the best/second-best result. For LED, we denote its stage-one DDPM model as LED† and the results from the LED initializer as LED*.
+    </p>
+              </div>
+            </div>
+            <!-- Table 2 -->
+            <div class="item item-table-2">
+              <div class="container is-max-desktop">
+                <h3 class="title is-4" style="text-align:center; margin-bottom:0.5em;">ETH-UCY Dataset</h3>
+                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>ETH</th>
+                    <th>HOTEL</th>
+                    <th>UNIV</th>
+                    <th>ZARA1</th>
+                    <th>ZARA2</th>
+                    <th>AVG</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>MID</td>
+                    <td>0.39/0.66</td>
+                    <td>0.13/0.22</td>
+                    <td><strong>0.22/0.45</strong></td>
+                    <td>0.17/0.30</td>
+                    <td>0.13/0.27</td>
+                    <td>0.21/0.38</td>
+                </tr>
+                <tr>
+                    <td>GroupNet</td>
+                    <td>0.46/0.73</td>
+                    <td>0.15/0.25</td>
+                    <td>0.26/0.49</td>
+                    <td>0.21/0.39</td>
+                    <td>0.17/0.33</td>
+                    <td>0.25/0.44</td>
+                </tr>
+                <tr>
+                    <td>TUTR</td>
+                    <td>0.40/0.61</td>
+                    <td><u>0.11/0.18</u></td>
+                    <td><u>0.23/0.42</u></td>
+                    <td>0.18/0.34</td>
+                    <td>0.13/0.25</td>
+                    <td>0.21/0.36</td>
+                </tr>
+                <tr>
+                    <td>EqMotion</td>
+                    <td>0.40/0.61</td>
+                    <td><u>0.12/0.18</u></td>
+                    <td><u>0.23/0.43</u></td>
+                    <td>0.18/0.32</td>
+                    <td><u>0.13/0.23</u></td>
+                    <td>0.21/0.35</td>
+                </tr>
+                <tr>
+                    <td>EigenTraj</td>
+                    <td>0.36/0.53</td>
+                    <td>0.12/0.19</td>
+                    <td>0.24/0.34</td>
+                    <td>0.19/0.33</td>
+                    <td>0.14/0.24</td>
+                    <td>0.21/0.34</td>
+                </tr>
+                <tr>
+                    <td>LED*</td>
+                    <td>0.39/0.58</td>
+                    <td><strong>0.11/0.17</strong></td>
+                    <td>0.26/0.44</td>
+                    <td>0.18/0.26</td>
+                    <td><u>0.13/0.22</u></td>
+                    <td>0.21/0.33</td>
+                </tr>
+                <tr>
+                    <td>SingularTraj</td>
+                    <td><strong>0.35/0.42</strong></td>
+                    <td>0.13/0.19</td>
+                    <td>0.25/0.44</td>
+                    <td>0.19/0.32</td>
+                    <td>0.15/0.25</td>
+                    <td>0.21/0.32</td>
+                </tr>
+                <tr>
+                    <td class="method-header"><span class="gradient-text">MoFlow</span></td>
+                    <td>0.40/0.57</td>
+                    <td><strong>0.11/0.17</strong></td>
+                    <td><u>0.23/0.39</u></td>
+                    <td><strong>0.15/0.26</strong></td>
+                    <td><strong>0.12/0.22</strong></td>
+                    <td><strong>0.20/0.32</strong></td>
+                </tr>
+                <tr>
+                    <td class="method-header"><span class="gradient-text">MoFlow</span>-IMLE</td>
+                    <td>0.40/0.58</td>
+                    <td>0.12/0.18</td>
+                    <td><u>0.23/0.39</u></td>
+                    <td><u>0.16/0.26</u></td>
+                    <td>0.13/0.22</td>
+                    <td>0.21/0.33</td>
+                </tr>
+            </tbody>
+                </table>
+                <p class="table-caption" style="margin-top:1em; font-size:1.05em; color:#555; text-align:center;">
+      Comparison with baseline distillation models on ETH-UCY dataset. min20ADE/min20FDE (meters) are reported. Bold/underlined fonts represent the best/second-best result. LED* represents the results from student model LED initializer.
+    </p>
+              </div>
+            </div>
+            <!-- Table 3 -->
+            <div class="item item-table-3">
+              <div class="container is-max-desktop">
+                <h3 class="title is-4" style="text-align:center; margin-bottom:0.5em;">SDD Dataset</h3>
+                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>ADE</th>
+          <th>FDE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Evo-Graph</td><td>13.90</td><td>22.90</td></tr>
+        <tr><td>Y-net</td><td>11.49</td><td>20.23</td></tr>
+        <tr><td>GroupNet</td><td>9.31</td><td>16.11</td></tr>
+        <tr><td>CAGN</td><td>9.42</td><td>15.93</td></tr>
+        <tr><td>NPSN</td><td>8.56</td><td>11.85</td></tr>
+        <tr><td>MemoNet</td><td>9.50</td><td>14.78</td></tr>
+        <tr><td>SocialVAE</td><td>8.88</td><td>14.81</td></tr>
+        <tr><td>MID</td><td>9.73</td><td>15.32</td></tr>
+        <tr><td>TUTR</td><td><u>7.76</u></td><td>12.69</td></tr>
+        <tr><td>EigenTraj</td><td>8.05</td><td>13.25</td></tr>
+        <tr><td>LED</td><td>8.48</td><td><u>11.66</u></td></tr>
+        <tr><td>ET+HighGraph</td><td>7.81</td><td><u>11.09</u></td></tr>
+        <tr><td><span class="gradient-text">MoFlow</span></td><td><strong>7.50</strong></td><td><strong>11.96</strong></td></tr>
+        <tr><td><span class="gradient-text">MoFlow</span>-IMLE</td><td>7.85</td><td>12.86</td></tr>
+      </tbody>
+    </table>
+    <p class="table-caption" style="margin-top:1em; font-size:1.05em; color:#555; text-align:center;">
+      Comparison with state-of-the-art methods on the SDD dataset in min20ADE/min20FDE (pixels).
+    </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Bibtex reference -->
 
