@@ -33,52 +33,14 @@
             border: 2px solid #333;
         }
 
-        /* Refined table style for Quantitative Analysis section */
+        /* =========================================
+           Quantitative Analysis Section Styles
+           ========================================= */
+
+        /* Layout */
         .quantitative-carousel .container.is-max-desktop {
             max-width: 1100px;
             margin: 0 auto 2.5em auto;
-        }
-
-        .quantitative-carousel .table {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-            font-size: 1.18rem;
-        }
-
-        .quantitative-carousel .table th {
-            background: linear-gradient(90deg, #e0e7ff 0%, #f0f7fa 100%);
-            color: #333;
-            font-weight: 600;
-            border-bottom: 2px solid #eaeaea;
-            padding: 1em 0.7em;
-            font-size: 1.15em;
-        }
-
-        .quantitative-carousel .table td {
-            padding: 1em 0.7em;
-            border-bottom: 1px solid #f3f3f3;
-            vertical-align: middle;
-            font-size: 1.08em;
-        }
-
-        .quantitative-carousel .table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .quantitative-carousel .table tbody tr:hover {
-            background: #f6faff;
-            transition: background 0.2s;
-        }
-
-        .quantitative-carousel .table th,
-        .quantitative-carousel .table td {
-            text-align: center;
-        }
-
-        /* Add extra space below the table for carousel dots */
-        .quantitative-carousel .container.is-max-desktop {
             padding-bottom: 3.5em;
         }
 
@@ -95,11 +57,105 @@
             display: block;
         }
 
-        /* Hide other tables in carousel view */
         .quantitative-carousel .carousel-items {
             display: flex;
             flex-wrap: nowrap;
             overflow: hidden;
+        }
+
+        /* ---- Table base ---- */
+        .quantitative-carousel .table.results-table {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 28px rgba(0, 0, 0, 0.09);
+            overflow: hidden;
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            font-size: 1.08rem;
+        }
+
+        /* ---- Header ---- */
+        .quantitative-carousel .table.results-table thead th {
+            background: linear-gradient(90deg, #0891b2 0%, #7c3aed 100%);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.9em 1em;
+            text-align: center;
+            border: none;
+            letter-spacing: 0.04em;
+            font-size: 1.06em;
+            white-space: nowrap;
+        }
+
+        .quantitative-carousel .table.results-table thead th:first-child {
+            text-align: left;
+            padding-left: 1.5em;
+        }
+
+        /* ---- Body cells ---- */
+        .quantitative-carousel .table.results-table tbody td {
+            padding: 0.72em 1em;
+            text-align: center;
+            vertical-align: middle;
+            border: none;
+            border-bottom: 1px solid #efefef;
+            color: #222;
+            transition: background 0.15s;
+        }
+
+        .quantitative-carousel .table.results-table tbody td:first-child {
+            text-align: left;
+            padding-left: 1.5em;
+            font-weight: 500;
+        }
+
+        /* ---- Alternating row colors ---- */
+        .quantitative-carousel .table.results-table tbody tr:nth-child(even) td {
+            background-color: #f8f9fb;
+        }
+
+        .quantitative-carousel .table.results-table tbody tr:nth-child(odd) td {
+            background-color: #ffffff;
+        }
+
+        /* ---- Hover ---- */
+        .quantitative-carousel .table.results-table tbody tr:hover td {
+            background-color: #eef4ff !important;
+        }
+
+        /* ---- Last row ---- */
+        .quantitative-carousel .table.results-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ---- MoFlow highlighted rows ---- */
+        .quantitative-carousel .table.results-table tbody tr.moflow-row td {
+            background: linear-gradient(90deg, rgba(8, 145, 178, 0.07) 0%, rgba(124, 58, 237, 0.07) 100%) !important;
+        }
+
+        .quantitative-carousel .table.results-table tbody tr.moflow-row td:first-child {
+            border-left: 3px solid #06b6d4;
+            padding-left: calc(1.5em - 3px);
+        }
+
+        /* ---- Separator above first MoFlow row ---- */
+        .quantitative-carousel .table.results-table tbody tr.moflow-first td {
+            border-top: 2px solid #c4b5fd;
+        }
+
+        /* ---- MoFlow hover ---- */
+        .quantitative-carousel .table.results-table tbody tr.moflow-row:hover td {
+            background: linear-gradient(90deg, rgba(8, 145, 178, 0.14) 0%, rgba(124, 58, 237, 0.14) 100%) !important;
+        }
+
+        /* ---- Caption ---- */
+        .table-caption {
+            margin-top: 0.9em;
+            font-size: 0.98em;
+            color: #666;
+            text-align: center;
+            line-height: 1.65;
         }
     </style>
 
@@ -650,7 +706,7 @@
             <div class="item item-table-1">
               <div class="container is-max-desktop">
                 <h3 class="title is-4" style="text-align:center; margin-bottom:0.5em;">NBA Dataset</h3>
-                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <table class="table results-table">
                   <thead>
                     <tr>
                     <th>Method</th>
@@ -703,14 +759,14 @@
                     <td><u>0.58/0.84</u></td>
                     <td><u>0.81/1.16</u></td>
                     </tr>
-                    <tr>
+                    <tr class="moflow-row moflow-first">
                     <td><span class="gradient-text">MoFlow</span></td>
                     <td><b>0.18/0.25</b></td>
                     <td><b>0.34/0.46</b></td>
                     <td><b>0.51/0.67</b></td>
                     <td><b>0.70</b>/<u>0.88</u></td>
                     </tr>
-                    <tr>
+                    <tr class="moflow-row">
                     <td><span class="gradient-text">MoFlow</span>-IMLE</td>
                     <td><b>0.18/0.25</b></td>
                     <td><b>0.34/0.47</b></td>
@@ -719,7 +775,7 @@
                     </tr>
                 </tbody>
                 </table>
-                <p class="table-caption" style="margin-top:1em; font-size:1.05em; color:#555; text-align:center;">
+                <p class="table-caption">
       Comparison with baseline models on NBA dataset. min20ADE/min20FDE (meters) are reported. Bold/underlined fonts represent the best/second-best result. For LED, we denote its stage-one DDPM model as LED† and the results from the LED initializer as LED*.
     </p>
               </div>
@@ -728,7 +784,7 @@
             <div class="item item-table-2">
               <div class="container is-max-desktop">
                 <h3 class="title is-4" style="text-align:center; margin-bottom:0.5em;">ETH-UCY Dataset</h3>
-                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <table class="table results-table">
             <thead>
                 <tr>
                     <th>Method</th>
@@ -804,8 +860,8 @@
                     <td>0.15/0.25</td>
                     <td>0.21/0.32</td>
                 </tr>
-                <tr>
-                    <td class="method-header"><span class="gradient-text">MoFlow</span></td>
+                <tr class="moflow-row moflow-first">
+                    <td><span class="gradient-text">MoFlow</span></td>
                     <td>0.40/0.57</td>
                     <td><strong>0.11/0.17</strong></td>
                     <td><u>0.23/0.39</u></td>
@@ -813,8 +869,8 @@
                     <td><strong>0.12/0.22</strong></td>
                     <td><strong>0.20/0.32</strong></td>
                 </tr>
-                <tr>
-                    <td class="method-header"><span class="gradient-text">MoFlow</span>-IMLE</td>
+                <tr class="moflow-row">
+                    <td><span class="gradient-text">MoFlow</span>-IMLE</td>
                     <td>0.40/0.58</td>
                     <td>0.12/0.18</td>
                     <td><u>0.23/0.39</u></td>
@@ -824,7 +880,7 @@
                 </tr>
             </tbody>
                 </table>
-                <p class="table-caption" style="margin-top:1em; font-size:1.05em; color:#555; text-align:center;">
+                <p class="table-caption">
       Comparison with baseline models on ETH-UCY dataset. min20ADE/min20FDE (meters) are reported. Bold/underlined fonts represent the best/second-best result. LED* represents the results from student model LED initializer.
     </p>
               </div>
@@ -833,7 +889,7 @@
             <div class="item item-table-3">
               <div class="container is-max-desktop">
                 <h3 class="title is-4" style="text-align:center; margin-bottom:0.5em;">SDD Dataset</h3>
-                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <table class="table results-table">
       <thead>
         <tr>
           <th>Method</th>
@@ -854,11 +910,11 @@
         <tr><td>EigenTraj</td><td>8.05</td><td>13.25</td></tr>
         <tr><td>LED</td><td>8.48</td><td><u>11.66</u></td></tr>
         <tr><td>ET+HighGraph</td><td>7.81</td><td><u>11.09</u></td></tr>
-        <tr><td><span class="gradient-text">MoFlow</span></td><td><strong>7.50</strong></td><td><strong>11.96</strong></td></tr>
-        <tr><td><span class="gradient-text">MoFlow</span>-IMLE</td><td>7.85</td><td>12.86</td></tr>
+        <tr class="moflow-row moflow-first"><td><span class="gradient-text">MoFlow</span></td><td><strong>7.50</strong></td><td><strong>11.96</strong></td></tr>
+        <tr class="moflow-row"><td><span class="gradient-text">MoFlow</span>-IMLE</td><td>7.85</td><td>12.86</td></tr>
       </tbody>
     </table>
-    <p class="table-caption" style="margin-top:1em; font-size:1.05em; color:#555; text-align:center;">
+    <p class="table-caption">
       Comparison with state-of-the-art methods on the SDD dataset in min20ADE/min20FDE (pixels).
     </p>
               </div>
